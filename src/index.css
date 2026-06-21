@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  /* Default: MoodFit Classic Theme */
+  --bg-primary: #12140e;
+  --bg-secondary: #1a1b14;
+  --bg-card: #1c1e15;
+  --text-primary: #fefae0;
+  --text-title: #fdf0d5;
+  --color-camel: #d4a373;
+  --color-light-bronze: #e3b070;
+  --color-tea-green: #b7b7a4;
+
+  --color-app-bg: var(--bg-primary);
+  --color-app-secondary: var(--bg-secondary);
+  --color-app-text: var(--text-primary);
+}
+
+[data-theme="cosmic-glow"] {
+  --bg-primary: #090a0f;/*  */
+  --bg-secondary: #131522;/*  */
+  --bg-card: #161828;/*  */
+  --text-primary: #f1f3f9;   /*  */
+  --text-title: #e2e8f0;/*  */
+  --color-camel: #a78bfa;/*  */
+  --color-light-bronze: #c084fc;/*  */
+  --color-tea-green: #818cf8;/*  */
+}
+
+[data-theme="forest-dew"] {
+  --bg-primary: #08110b;
+  --bg-secondary: #101c13;
+  --bg-card: #142419;
+  --text-primary: #e2ede4;
+  --text-title: #f2f7f4;
+  --color-camel: #95a78d;
+  --color-light-bronze: #b1cc97;
+  --color-tea-green: #84a98c;
+}
+
+[data-theme="sunset-terracotta"] {
+  --bg-primary: #1c1310;
+  --bg-secondary: #271c18;
+  --bg-card: #30231e;
+  --text-primary: #fafaf9;
+  --text-title: #ffedd5;
+  --color-camel: #fb7185;
+  --color-light-bronze: #fca5a5;
+  --color-tea-green: #fed7aa;
+}
+
+
+[data-theme="lavender-frost"] {
+  --bg-primary: #eae4e9;
+  --bg-secondary: #f0efeb;
+  --bg-card: #fde2e4;
+  --text-primary: #22223b;
+  --text-title: #4a4e69;
+  --color-camel: #9a8c98;
+  --color-light-bronze: #7209b7;
+  --color-tea-green: #c9ada7;
+}
+
+@theme {
+  --lavender-mist: #eae4e9ff;
+  --linen: #fff1e6ff;
+  --soft-blush: #fde2e4ff;
+  --petal-frost: #fad2e1ff;
+  --mint-cream: #e2ece9ff;
+  --light-blue: #bee1e6ff;
+  --parchment: #f0efebff;
+  --lavender: #dfe7fdff;
+  --periwinkle: #cddafdff;
+
+  --color-camel: var(--color-camel);
+  --color-light-bronze: var(--color-light-bronze);
+  --color-tea-green: var(--color-tea-green);
+  --color-app-bg: var(--bg-primary);
+  --color-app-text: var(--text-primary);
+  --color-app-secondary: var(--bg-secondary);
+  --color-app-card: var(--bg-card);
+  --color-text-title: var(--text-title);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

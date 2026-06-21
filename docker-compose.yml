@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # FastAPI ML Inference Backend
+  fastapi-backend:
+    build:
+      context: ./fastapi-backend
+      dockerfile: Dockerfile
+    container_name: moodfit_ml_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .env:/app/.env
+      - ./models:/app/models
+    environment:
+      - PORT=8000
+      - DATABASE_URL=${DATABASE_URL}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - MODEL_PATH=${ROBERTA_MODEL_PATH:-models/roberta-artemis}
+      - FAISS_INDEX_PATH=${FAISS_INDEX_PATH:-models/deepfashion.index}
+      - CLIP_MODEL_NAME=${CLIP_MODEL_NAME:-clip-ViT-B-32}
+      - CONFLICT_THRESHOLD=${CONFLICT_THRESHOLD:-0.40}
+      - DATA_OUTPUT_DIR=data
+      - SUPABASE_WARDROBE_BUCKET=wardrobe-indexes
+      - WARDROBE_INDEX_CACHE_SIZE=50
+      - MAX_WARDROBE_IMAGES=50
+      - MAX_IMAGE_SIZE_MB=10
+      - PERSONAL_INDEX_BOOST=0.05
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Next.js App Router Frontend
+  next-frontend:
+    build:
+      context: ./next-frontend
+      dockerfile: Dockerfile
+    container_name: moodfit_client
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - fastapi-backend
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
